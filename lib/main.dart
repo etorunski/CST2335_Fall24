@@ -62,15 +62,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
 
-                  ElevatedButton(child:Text("Button 1"), onPressed:buttonClicked),
-                  ElevatedButton(child:Text("Button 2"), onPressed:buttonClicked),
-                  ElevatedButton(child:Text("Button 3"), onPressed:buttonClicked),
-                  ElevatedButton(child:Text("Button 4"), onPressed:buttonClicked),
-                  ElevatedButton(child:Text("Button 5"), onPressed:buttonClicked),
-                  ElevatedButton(child:Text("Button 6"), onPressed:buttonClicked),
+                  FilledButton(child:Text("Button 1"), onPressed:buttonClicked),
+                  FilledButton(child:Text("Button 2"), onPressed:buttonClicked),
+                  FilledButton(child:Text("Button 3"), onPressed:buttonClicked),
+                  FilledButton(child:Text("Button 4"), onPressed:buttonClicked),
+                  FilledButton(child:Text("Button 5"), onPressed:buttonClicked),
+                  FilledButton(child:Text("Button 6"), onPressed:buttonClicked),
                 ],
         ),
       )
