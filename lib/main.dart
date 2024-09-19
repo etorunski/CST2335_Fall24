@@ -102,16 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Eric's application"  ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
+        child: Stack(
+          alignment: AlignmentDirectional.bottomStart,
 
-                  FilledButton(child:Text("Button 1"), onPressed:buttonClicked),
-                  FilledButton(child:Text("Button 2"), onPressed:buttonClicked),
-                  FilledButton(child:Text("Button 3"), onPressed:buttonClicked),
-                  FilledButton(child:Text("Button 4"), onPressed:buttonClicked),
-                  FilledButton(child:Text("Button 5"), onPressed:buttonClicked),
-                  FilledButton(child:Text("Button 6"), onPressed:buttonClicked),
+                children: <Widget>[
+                  Image.asset("images/algonquin.jpg"),
+                  Text("Algonquin College", style: TextStyle(fontSize: 90.0, backgroundColor:Colors.white ),)
+
                 ],
         ),
       )
