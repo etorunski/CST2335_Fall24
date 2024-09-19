@@ -102,15 +102,26 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Eric's application"  ),
       ),
       body: Center(
-        child: Stack(
-          alignment: AlignmentDirectional.bottomStart,
-
+        child:
+        Padding(
+    padding: EdgeInsets.all(30.0),
+    child:
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start, //(left/right)
+          mainAxisAlignment: MainAxisAlignment.center,//put things in the middle (up / down)
                 children: <Widget>[
-                  Image.asset("images/algonquin.jpg"),
-                  Text("Algonquin College", style: TextStyle(fontSize: 90.0, backgroundColor:Colors.white ),)
-
-                ],
+        CircleAvatar(
+            backgroundImage: AssetImage('images/algonquin.jpg'),
+            radius:50
         ),
+                  Text("One-pan skillet cookie", style: TextStyle(fontSize: 40.0, color: Colors.orange, backgroundColor:Colors.white ),),
+                  Text("Ingredient list"),
+                  SizedBox(height:50, width:200),//empty space, 100pixels high
+                  Row(children: [Icon(Icons.add_circle), Text("1 stick (8 tbsp) Unsalted butter") ]),
+                  Row(children: [Icon(Icons.add_circle), Text("1/2 granulated sugar") ],)
+                ],
+        ), )
+
       )
     );
   }
