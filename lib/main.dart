@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -55,10 +56,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //top-most element is Scaffold
+
     return Scaffold(
+      drawer:Column(
+          children: [
+        Text("I'm in a drawer"),
+            Text("I'm in a drawer"),
+      ]),
+
+      bottomNavigationBar:
+      BottomNavigationBar(
+          onTap: ( whichItem ){
+            if(whichItem == 0){
+              //clicked on camera
+            }
+            else if(whichItem == 1){
+              //clicked on credit card
+            }
+
+          },
+          items: [
+        BottomNavigationBarItem( // item 0
+            icon: Icon(Icons.add_a_photo_outlined),
+            label:"Camera"
+        ),
+
+        BottomNavigationBarItem(  //item 1
+            icon: Icon(Icons.add_card ),
+            label:"Payment"
+        ),
+      ]),
+
       appBar: AppBar(
+        actions: [
+
+            OutlinedButton(onPressed: () { }, child:Text("Button 1")),
+            OutlinedButton(onPressed: () { }, child:Text("Button 2")),
+            OutlinedButton(onPressed: () { }, child:Text("Button 3")),
+            OutlinedButton(onPressed: () { }, child:Text("Button 4")),
+            OutlinedButton(onPressed: () { }, child:Text("Button 5")),
+            OutlinedButton(onPressed: () { }, child:Text("Button 6")),
+     ],//array of Widgets
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text("Eric's application"  ),
       ),
       body: Center(
         child: Column(
