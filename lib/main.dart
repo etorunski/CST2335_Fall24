@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
     prefs.getString("Name").then( (name) {
-      _controller.text = "";
+      _controller.text = name;
       if(name.isNotEmpty){
         //show a Snackbar
       }
