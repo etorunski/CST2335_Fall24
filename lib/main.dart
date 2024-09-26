@@ -1,4 +1,6 @@
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,11 +37,32 @@ class _MyHomePageState extends State<MyHomePage> {
   late TextEditingController _controller; //late - Constructor in initState()
 
   var isChecked = false;
+  //called second:
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
 
+    const snackBar = SnackBar( content: Text('Yay! A SnackBar!') );
+    //context does exist
+    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  //called first:
   @override //same as in java
-  void initState() {
+  void initState()  {
     super.initState(); //call the parent initState()
     _controller = TextEditingController(); //our late constructor
+
+
+    EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
+    prefs.getString("Name").then( (name) {
+      _controller.text = "";
+      if(name.isNotEmpty){
+        //show a Snackbar
+      }
+    });
+ 
   }
 
 
@@ -49,6 +72,24 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
     _controller.dispose();    // clean up memory
   }
+
+//option 1:
+  void loadPreferences() async //there's a await somewhere in the function
+  {
+    //asynchronous thread:
+    //stop here and wait for thread to complete
+    var prefs = await SharedPreferences.getInstance(); // means singleton object
+  }
+
+
+  //option2
+  void loadPrefs()
+  {
+  ///loads the data: not asynchronous:
+    EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
+    prefs.setString("Name", _controller.value.text);//what user typed
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +102,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextField(controller: _controller,
+                decoration: InputDecoration(
+                    hintText:"Type your login name",
+                    border: OutlineInputBorder(),
+                    labelText: "Login"
+                )),
+
+
             ElevatedButton( onPressed: buttonClicked, //Lambda, or anonymous function
                 child:Text("Click Here"),
+            ),
+
+            ElevatedButton( onPressed: () async{
+              EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
+              prefs.remove("Name");
+            },
+              //Lambda, or anonymous function
+              child:Text("Clear data"),
             )
           ],
         ),
@@ -73,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //this runs when you click the button
   void buttonClicked( ){
 
+    loadPrefs();
   }
 
 
