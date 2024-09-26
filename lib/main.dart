@@ -33,20 +33,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  late BuildContext theContext;
 
   late TextEditingController _controller; //late - Constructor in initState()
 
-  var isChecked = false;
-  //called second:
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-
-    const snackBar = SnackBar( content: Text('Yay! A SnackBar!') );
-    //context does exist
-    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
 
   //called first:
   @override //same as in java
@@ -55,11 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
     _controller = TextEditingController(); //our late constructor
 
 
+
+
     EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
     prefs.getString("Name").then( (name) {
       _controller.text = name;
       if(name.isNotEmpty){
-        //show a Snackbar
+
+        Future.delayed(Duration.zero, () {
+          var snackBar = SnackBar( content: Text('Yay! A SnackBar!') );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        });
+
       }
     });
  
@@ -93,6 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    theContext = context;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
