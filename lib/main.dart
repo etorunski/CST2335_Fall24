@@ -124,11 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const  Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 20.0, 39.0, 0.0),
-                child: Text('You have pushed the button this many times:',style:TextStyle(fontSize: 60.0))
-            ),
-
 
             TextField(controller: _controller,
                decoration: InputDecoration(
@@ -138,32 +133,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ),
 
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Image.asset("images/algonquin.jpg", height:600, width:800),
-         ),
-
-
             ElevatedButton( onPressed: ( ){
               //what was typed is:
       var input = _controller.value.text;
 
 
-      //to overwrite:
-              _controller.text = "You typed in:" + input;
-
             }, //Lambda, or anonymous function
-                child:Image.asset("images/algonquin.jpg", height:200, width:200),  )
+                child:Text("Click here")  )
 
 
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
