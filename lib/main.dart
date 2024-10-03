@@ -1,4 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'DataRepository.dart';
+import 'OtherPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,28 +15,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes:  {
+        '/Main'   :   (context) => MyHomePage(title:"Title"),
+        '/Second' :   (context) { return OtherPage(); } ,
+        '/Third'  :   (context) { return OtherPage(); }
+      },
+
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+      initialRoute: '/Main',
+     );
   }
 }
 
@@ -51,7 +46,7 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() { return _MyHomePageState(); }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -77,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState(); //call the parent initState()
     _controller = TextEditingController(); //our late constructor
+    DataRepository.loadData();//asynchronous, but certain to finish before going to second page
   }
 
 
@@ -127,19 +123,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
             TextField(controller: _controller,
                decoration: InputDecoration(
-                  hintText: "Type something here",
-                  labelText:"Put your first name here",
+                  hintText: "Type a URL here",
+                  labelText:"Enter a URL",
               border: OutlineInputBorder(),
             ),
             ),
 
-            ElevatedButton( onPressed: ( ){
+            ElevatedButton( onPressed: ( )  {
               //what was typed is:
-      var input = _controller.value.text;
+              var input = _controller.value.text;
 
+              canLaunch( input).then((canDo) {
+                if(canDo) {
+                  launch(input);
+                }
+                else
+                {
+                  var snackBar = SnackBar( content: Text('That is not supported on your device') );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              }); //returns true if your device does that protocol
 
+              /*
+              DataRepository.name = input;
+                //go to other page:
+              Navigator.pushNamed(context, '/Second');
+                */
             }, //Lambda, or anonymous function
-                child:Text("Click here")  )
+                child: Icon(Icons.mail)  )
 
 
           ],
