@@ -124,28 +124,24 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Row(children: [
+              Flexible(child:
                TextField(controller: _controller,
                decoration: InputDecoration(
                   hintText: "Type something here",
                   labelText:"Put your first name here",
               border: OutlineInputBorder(),
             ),
-            ),
+            )),
 
 
 
             ElevatedButton( onPressed: ( ){
               //what was typed is:
               var input = _controller.value.text;
-
-
-      //to overwrite:
-              _controller.text = "You typed in:" + input;
-
             }, //Lambda, or anonymous function
                 child:Text("Click here"),  )
-
-
+            ],)
           ],
         ),
       ),
