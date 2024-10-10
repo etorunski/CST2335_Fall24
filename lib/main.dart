@@ -124,13 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const  Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 20.0, 39.0, 0.0),
-                child: Text('You have pushed the button this many times:',style:TextStyle(fontSize: 60.0))
-            ),
-
-
-            TextField(controller: _controller,
+               TextField(controller: _controller,
                decoration: InputDecoration(
                   hintText: "Type something here",
                   labelText:"Put your first name here",
@@ -138,10 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ),
 
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Image.asset("images/algonquin.jpg", height:600, width:800),
-         ),
 
 
             ElevatedButton( onPressed: ( ){
