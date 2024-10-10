@@ -136,14 +136,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ElevatedButton( onPressed: ( ){
               //what was typed is:
-      var input = _controller.value.text;
+              var input = _controller.value.text;
 
 
       //to overwrite:
               _controller.text = "You typed in:" + input;
 
             }, //Lambda, or anonymous function
-                child:Image.asset("images/algonquin.jpg", height:200, width:200),  )
+                child:Text("Click here"),  )
 
 
           ],
